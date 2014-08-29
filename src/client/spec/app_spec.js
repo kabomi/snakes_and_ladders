@@ -59,7 +59,7 @@
                 player = app.Player(0);
                 player.nextMove = 5;
             });
-            it("evaluates next player position only if the player can continue", function(){
+            it("evaluates next player position only if the player can start", function(){
                 expect(game.evaluate(player)).toBe(false);
             });
             it("evaluates next player position", function(){
@@ -67,7 +67,7 @@
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(5);
             });
-            
+
         });
     });
 
