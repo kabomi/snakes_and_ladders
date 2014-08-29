@@ -8,7 +8,14 @@ var app = app || {};
     function init() {
         var self = {
             evaluate: function(player){
-                if (player.cantStart) return false;
+                if (player.cantStart){
+                    if (player.nextMove !== app.START_MOVE){
+                        return false;  
+                    }
+                    player.cantStart = false;
+                    return true;
+                }
+
 
                 player.position += player.nextMove;
                 return true;
@@ -52,5 +59,7 @@ var app = app || {};
 
     app.Player = Player;
     app.Board = Board;
-    app.init = init; 
+    app.init = init;
+
+    app.START_MOVE = 3;
 })();
