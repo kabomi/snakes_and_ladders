@@ -26,6 +26,16 @@ var app = app || {};
         return self;
     }
 
+    function Board(width, height){
+        var self = {
+            width: width,
+            height: height
+        };
+
+        return self;
+    }
+
     app.Player = Player;
+    app.Board = Board;
     app.init = init; 
 })();
