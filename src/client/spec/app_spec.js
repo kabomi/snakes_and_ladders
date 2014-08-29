@@ -13,13 +13,13 @@
                  expect(player.position).toBe(5);
             });
             it("moves to another position from its current position", function(){
-                player.move(5);
+                player.moveForward(5);
                 expect(player.position).toBe(10);
-                player.move(10);
+                player.moveForward(10);
                 expect(player.position).toBe(20);
             });
             it("moves backwards from its current position", function(){
-                player.moveBackwards(5);
+                player.moveBackward(5);
                 expect(player.position).toBe(0);
             });
         });

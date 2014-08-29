@@ -14,10 +14,10 @@ var app = app || {};
     function Player(position){
         var self ={
             position: position,
-            move: function(newPosition){
-                self.position = self.position + newPosition;
+            moveForward: function(numPositions){
+                self.position = self.position + numPositions;
             },
-            moveBackwards: function(numPositions){
+            moveBackward: function(numPositions){
                 self.position = self.position - numPositions;
             }
         };
