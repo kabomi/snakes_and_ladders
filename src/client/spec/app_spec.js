@@ -52,22 +52,22 @@
             });
         });
         describe("Game", function(){
-            it("evaluates next player position only if the player can continue", function(){
-                var board = app.Board(10, 10);
-                var game = app.init(board);
-                var player = app.Player(0);
+            var board, game, player;
+            beforeEach(function(){
+                board = app.Board(10, 10);
+                game = app.init(board);
+                player = app.Player(0);
                 player.nextMove = 5;
+            });
+            it("evaluates next player position only if the player can continue", function(){
                 expect(game.evaluate(player)).toBe(false);
             });
             it("evaluates next player position", function(){
-                var board = app.Board(10, 10);
-                var game = app.init(board);
-                var player = app.Player(0);
                 player.cantStart = false;
-                player.nextMove = 5;
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(5);
             });
+            
         });
     });
 
