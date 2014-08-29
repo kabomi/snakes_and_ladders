@@ -22,6 +22,10 @@
                 player.moveBackward(5);
                 expect(player.position).toBe(0);
             });
+            it("can't moves backwards if init position is reached", function(){
+                player.moveBackward(6);
+                expect(player.position).toBe(0);
+            });
         });
         
     });
