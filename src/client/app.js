@@ -29,7 +29,11 @@ var app = app || {};
     function Board(width, height){
         var self = {
             width: width,
-            height: height
+            height: height,
+            snakes: [],
+            addSnake: function(start, end){
+                self.snakes.push({start: start,end: end});
+            }
         };
 
         return self;

@@ -33,6 +33,14 @@
                 expect(board.width).toBe(10);
                 expect(board.height).toBe(10);
             });
+            it("can add snakes", function(){
+                var board = app.Board(10, 10);
+                board.addSnake(15, 5);
+                expect(board.snakes.length).toBe(1);
+                var snake = board.snakes[0];
+                expect(snake.start).toBe(15);
+                expect(snake.end).toBe(5);
+            });
         });
         
     });
