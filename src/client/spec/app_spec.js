@@ -4,6 +4,12 @@
     "use strict";
     
     describe("Snake and ladders", function (){
+        describe("Player", function(){
+            it("defines its position", function(){
+                 var player = new app.Player(5);
+                 expect(player.position).toBe(5);
+            });
+        });
         
     });
 
