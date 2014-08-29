@@ -8,10 +8,10 @@ var app = app || {};
     function init() {
         var self = {
             evaluate: function(player){
-                if (!player.canStart) return false;
+                if (player.cantStart) return false;
 
                 player.position += player.nextMove;
-                return player.canStart;
+                return true;
             }
         };
         
@@ -20,7 +20,7 @@ var app = app || {};
     function Player(position){
         var self ={
             position: position,
-            canStart: false,
+            cantStart: true,
             moveForward: function(numPositions){
                 self.position = self.position + numPositions;
             },

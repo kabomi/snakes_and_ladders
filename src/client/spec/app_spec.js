@@ -63,7 +63,7 @@
                 var board = app.Board(10, 10);
                 var game = app.init(board);
                 var player = app.Player(0);
-                player.canStart = true;
+                player.cantStart = false;
                 player.nextMove = 5;
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(5);
