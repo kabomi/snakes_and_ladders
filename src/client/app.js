@@ -33,6 +33,10 @@ var app = app || {};
             snakes: [],
             addSnake: function(start, end){
                 self.snakes.push({start: start,end: end});
+            },
+            ladders: [],
+            addLadder: function(start, end){
+                self.ladders.push({start: start,end: end});
             }
         };
 
