@@ -57,7 +57,7 @@
                 var game = app.init(board);
                 var player = app.Player(0);
                 player.nextMove = 5;
-                expect(game.evaluate(player)).toBe(true);
+                expect(game.evaluate(player)).toBe(false);
             });
         });
     });

@@ -7,6 +7,9 @@ var app = app || {};
 
     function init() {
         var self = {
+            evaluate: function(player){
+                return player.canStart;
+            }
         };
         
         return self;
@@ -14,6 +17,7 @@ var app = app || {};
     function Player(position){
         var self ={
             position: position,
+            canStart: false,
             moveForward: function(numPositions){
                 self.position = self.position + numPositions;
             },
