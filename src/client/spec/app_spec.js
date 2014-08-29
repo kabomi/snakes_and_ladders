@@ -41,6 +41,14 @@
                 expect(snake.start).toBe(15);
                 expect(snake.end).toBe(5);
             });
+            it("can add ladders", function(){
+                var board = app.Board(10, 10);
+                board.addLadder(5, 15);
+                expect(board.ladders.length).toBe(1);
+                var ladder = board.ladders[0];
+                expect(ladder.start).toBe(5);
+                expect(ladder.end).toBe(15);
+            });
         });
         
     });
