@@ -51,7 +51,15 @@
                 expect(ladder.end).toBe(15);
             });
         });
-        
+        describe("Game", function(){
+            it("evaluates next player position only if the player can continue", function(){
+                var board = app.Board(10, 10);
+                var game = app.init(board);
+                var player = app.Player(0);
+                player.nextMove = 5;
+                expect(game.evaluate(player)).toBe(true);
+            });
+        });
     });
 
 })();
