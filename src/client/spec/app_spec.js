@@ -27,6 +27,13 @@
                 expect(player.position).toBe(0);
             });
         });
+        describe("Board", function(){
+            it("is defined by height and width", function(){
+                var board = app.Board(10, 10);
+                expect(board.width).toBe(10);
+                expect(board.height).toBe(10);
+            });
+        });
         
     });
 
