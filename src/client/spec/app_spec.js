@@ -67,7 +67,12 @@
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(5);
             });
-
+            it("lets a player start after its next move is " + app.START_MOVE, function(){
+                expect(game.evaluate(player)).toBe(false);
+                player.nextMove = app.START_MOVE;
+                expect(game.evaluate(player)).toBe(true);
+                expect(player.position).toBe(0);
+            });
         });
     });
 
