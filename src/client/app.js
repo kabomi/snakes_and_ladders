@@ -19,6 +19,7 @@ var app = app || {};
             },
             moveBackward: function(numPositions){
                 self.position = self.position - numPositions;
+                if (self.position < 0) self.position = 0;
             }
         };
 
