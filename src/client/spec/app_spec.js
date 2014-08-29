@@ -59,6 +59,15 @@
                 player.nextMove = 5;
                 expect(game.evaluate(player)).toBe(false);
             });
+            it("evaluates next player position", function(){
+                var board = app.Board(10, 10);
+                var game = app.init(board);
+                var player = app.Player(0);
+                player.canStart = true;
+                player.nextMove = 5;
+                expect(game.evaluate(player)).toBe(true);
+                expect(player.position).toBe(5);
+            });
         });
     });
 
