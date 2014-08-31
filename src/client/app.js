@@ -23,6 +23,11 @@ var app = app || {};
                         player.position = ladder.end;
                     }
                 });
+                board.snakes.forEach(function(snake){
+                    if (snake.start === player.position){
+                        player.position = snake.end;
+                    }
+                });
 
                 return true;
             }
