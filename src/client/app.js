@@ -20,7 +20,9 @@ var app = app || {};
                     player.cantStart = false;
                     return true;
                 }
-                player.position += player.nextMove;
+                if ((player.position + player.nextMove) <= board.lastField){
+                    player.position += player.nextMove;
+                }
 
                 if (player.position === board.lastField){
                     self.winner = player;
