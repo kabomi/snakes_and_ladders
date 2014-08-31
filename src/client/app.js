@@ -9,6 +9,10 @@ var app = app || {};
         var self = {
             board: board,
             evaluate: function(player){
+                if (self.finished &&
+                    self.winner){
+                    return false;
+                }
                 if (player.cantStart){
                     if (player.nextMove !== app.START_MOVE){
                         return false;  
@@ -22,7 +26,7 @@ var app = app || {};
                     self.winner = player;
                     self.finished = true;
                 }
-                
+
                 player.position = board.getSnakeEndFrom(player.position);
                 
                 player.position = board.getLadderEndFrom(player.position);
