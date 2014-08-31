@@ -73,6 +73,13 @@
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(0);
             });
+            it("move a player to the end of a ladder when its next move goes into ladder start", function(){
+                board.addLadder(5, 15);
+                player.cantStart = false;
+                player.nextMove = 5;
+                expect(game.evaluate(player)).toBe(true);
+                expect(player.position).toBe(15);
+            });
         });
     });
 
