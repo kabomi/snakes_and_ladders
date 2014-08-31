@@ -62,13 +62,13 @@
                 board.addSnake(5, 1);
                 expect(board.snakes.length).toBe(1);
                 board.addLadder(15, 25);
-                expect(board.ladders.length).toBe(1);
+                expect(board.ladders.length).toBe(0);
                 board.addLadder(0, 15);
-                expect(board.ladders.length).toBe(1);
+                expect(board.ladders.length).toBe(0);
                 board.addLadder(5, 10);
-                expect(board.ladders.length).toBe(1);
+                expect(board.ladders.length).toBe(0);
                 board.addLadder(1, 5);
-                expect(board.ladders.length).toBe(1);
+                expect(board.ladders.length).toBe(0);
                 board.addSnake(10, 6);
                 board.addLadder(11, 22);
                 expect(board.snakes.length).toBe(2);

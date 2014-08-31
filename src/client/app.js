@@ -51,11 +51,53 @@ var app = app || {};
             height: height,
             snakes: [],
             addSnake: function(start, end){
-                self.snakes.push({start: start,end: end});
+                var validPositions = true;
+                self.snakes.forEach(function(snake){
+                    if ((snake.start === start) ||
+                        (snake.start === end) ||
+                        (snake.end === start) ||
+                        (snake.end === end)){
+
+                        validPositions = false;
+                    }
+                });
+                self.ladders.forEach(function(ladder){
+                    if ((ladder.start === start) ||
+                        (ladder.start === end) ||
+                        (ladder.end === start) ||
+                        (ladder.end === end)){
+
+                        validPositions = false;
+                    }
+                });
+                if (validPositions){
+                    self.snakes.push({start: start,end: end});
+                }
             },
             ladders: [],
             addLadder: function(start, end){
-                self.ladders.push({start: start,end: end});
+                var validPositions = true;
+                self.snakes.forEach(function(snake){
+                    if ((snake.start === start) ||
+                        (snake.start === end) ||
+                        (snake.end === start) ||
+                        (snake.end === end)){
+
+                        validPositions = false;
+                    }
+                });
+                self.ladders.forEach(function(ladder){
+                    if ((ladder.start === start) ||
+                        (ladder.start === end) ||
+                        (ladder.end === start) ||
+                        (ladder.end === end)){
+
+                        validPositions = false;
+                    }
+                });
+                if (validPositions){
+                    self.ladders.push({start: start,end: end});
+                }
             },
             getSnakeEndFrom: function(position){
                 return getSpecialPositionFrom(position, self.snakes);
