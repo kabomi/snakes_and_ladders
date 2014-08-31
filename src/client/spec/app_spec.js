@@ -50,6 +50,30 @@
                 expect(ladder.start).toBe(5);
                 expect(ladder.end).toBe(15);
             });
+            it("can't add a snake or ladder if its start/end coincides with start/end of others", function(){
+                board.addSnake(15, 5);
+                expect(board.snakes.length).toBe(1);
+                board.addSnake(15, 6);
+                expect(board.snakes.length).toBe(1);
+                board.addSnake(10, 5);
+                expect(board.snakes.length).toBe(1);
+                board.addSnake(25, 15);
+                expect(board.snakes.length).toBe(1);
+                board.addSnake(5, 1);
+                expect(board.snakes.length).toBe(1);
+                board.addLadder(15, 25);
+                expect(board.ladders.length).toBe(1);
+                board.addLadder(0, 15);
+                expect(board.ladders.length).toBe(1);
+                board.addLadder(5, 10);
+                expect(board.ladders.length).toBe(1);
+                board.addLadder(1, 5);
+                expect(board.ladders.length).toBe(1);
+                board.addSnake(10, 6);
+                board.addLadder(11, 22);
+                expect(board.snakes.length).toBe(2);
+                expect(board.ladders.length).toBe(1);
+            });
         });
         describe("Game", function(){
             var board, game, player;
