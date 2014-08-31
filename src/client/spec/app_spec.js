@@ -128,6 +128,20 @@
                 expect(game.winner).toBe(player);
                 expect(game.finished).toBe(true);
             });
+            it("doesnt evaluate game if there is a winner", function(){
+                player.cantStart = false;
+                player.position = 95;
+                player.nextMove = 5;
+                expect(game.evaluate(player)).toBe(true);
+                expect(game.winner).toBe(player);
+                expect(game.finished).toBe(true);
+                var player2 = app.Player(95);
+                player2.cantStart = false;
+                player2.nextMove = 5;
+                expect(game.evaluate(player2)).toBe(false);
+                expect(game.winner).toBe(player);
+                expect(game.finished).toBe(true);
+            });
         });
     });
 
