@@ -119,6 +119,15 @@
                 expect(game.winner).toBe(player);
                 expect(game.finished).toBe(true);
             });
+            it("finish the game if a player reachs the last field and there is a snake start", function(){
+                board.addSnake(100, 50);
+                player.cantStart = false;
+                player.position = 95;
+                player.nextMove = 5;
+                expect(game.evaluate(player)).toBe(true);
+                expect(game.winner).toBe(player);
+                expect(game.finished).toBe(true);
+            });
         });
     });
 
