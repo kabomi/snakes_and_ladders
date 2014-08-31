@@ -22,7 +22,10 @@ var app = app || {};
                 
                 player.position = board.getLadderEndFrom(player.position);
                 
-
+                if (player.position === board.lastField){
+                    self.winner = player;
+                    self.finished = true;
+                }
                 return true;
             }
         };
@@ -49,6 +52,7 @@ var app = app || {};
         var self = {
             width: width,
             height: height,
+            lastField: width*height,
             snakes: [],
             addSnake: function(start, end){
                 addSpecial(start, end, 'snakes');
