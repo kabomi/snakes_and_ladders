@@ -128,6 +128,16 @@
                 expect(game.winner).toBe(player);
                 expect(game.finished).toBe(true);
             });
+            it("doesnt finish the game if a player move beyond the last field", function(){
+                board.addSnake(100, 50);
+                player.cantStart = false;
+                player.position = 95;
+                player.nextMove = 6;
+                expect(game.evaluate(player)).toBe(true);
+                expect(game.winner).toBeUndefined();
+                expect(game.finished).toBeFalsy();
+                expect(player.position).toBe(95);
+            });
             it("doesnt evaluate game if there is a winner", function(){
                 player.cantStart = false;
                 player.position = 95;
