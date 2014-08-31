@@ -73,12 +73,19 @@
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(0);
             });
-            it("move a player to the end of a ladder when its next move goes into ladder start", function(){
+            it("moves a player to the end of a ladder when its next move goes into ladder start", function(){
                 board.addLadder(5, 15);
                 player.cantStart = false;
                 player.nextMove = 5;
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(15);
+            });
+            it("moves a player to the end of a snake when its next move goes into snake start", function(){
+                board.addSnake(15, 5);
+                player.cantStart = false;
+                player.nextMove = 15;
+                expect(game.evaluate(player)).toBe(true);
+                expect(player.position).toBe(5);
             });
         });
     });
