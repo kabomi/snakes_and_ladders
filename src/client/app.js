@@ -51,53 +51,11 @@ var app = app || {};
             height: height,
             snakes: [],
             addSnake: function(start, end){
-                var validPositions = true;
-                self.snakes.forEach(function(snake){
-                    if ((snake.start === start) ||
-                        (snake.start === end) ||
-                        (snake.end === start) ||
-                        (snake.end === end)){
-
-                        validPositions = false;
-                    }
-                });
-                self.ladders.forEach(function(ladder){
-                    if ((ladder.start === start) ||
-                        (ladder.start === end) ||
-                        (ladder.end === start) ||
-                        (ladder.end === end)){
-
-                        validPositions = false;
-                    }
-                });
-                if (validPositions){
-                    self.snakes.push({start: start,end: end});
-                }
+                addSpecial(start, end, 'snakes');
             },
             ladders: [],
             addLadder: function(start, end){
-                var validPositions = true;
-                self.snakes.forEach(function(snake){
-                    if ((snake.start === start) ||
-                        (snake.start === end) ||
-                        (snake.end === start) ||
-                        (snake.end === end)){
-
-                        validPositions = false;
-                    }
-                });
-                self.ladders.forEach(function(ladder){
-                    if ((ladder.start === start) ||
-                        (ladder.start === end) ||
-                        (ladder.end === start) ||
-                        (ladder.end === end)){
-
-                        validPositions = false;
-                    }
-                });
-                if (validPositions){
-                    self.ladders.push({start: start,end: end});
-                }
+                addSpecial(start, end, 'ladders');
             },
             getSnakeEndFrom: function(position){
                 return getSpecialPositionFrom(position, self.snakes);
@@ -106,6 +64,30 @@ var app = app || {};
                 return getSpecialPositionFrom(position, self.ladders);
             }
         };
+        function addSpecial(start, end, type){
+            var validPositions = true;
+                self.snakes.forEach(function(snake){
+                    if ((snake.start === start) ||
+                        (snake.start === end) ||
+                        (snake.end === start) ||
+                        (snake.end === end)){
+
+                        validPositions = false;
+                    }
+                });
+                self.ladders.forEach(function(ladder){
+                    if ((ladder.start === start) ||
+                        (ladder.start === end) ||
+                        (ladder.end === start) ||
+                        (ladder.end === end)){
+
+                        validPositions = false;
+                    }
+                });
+                if (validPositions){
+                    self[type].push({start: start,end: end});
+                }
+        }
         function getSpecialPositionFrom(position, collection){
             var result = position;
             collection.forEach(function(special){
