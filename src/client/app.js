@@ -18,16 +18,10 @@ var app = app || {};
                 }
                 player.position += player.nextMove;
 
-                board.ladders.forEach(function(ladder){
-                    if (ladder.start === player.position){
-                        player.position = ladder.end;
-                    }
-                });
-                board.snakes.forEach(function(snake){
-                    if (snake.start === player.position){
-                        player.position = snake.end;
-                    }
-                });
+                player.position = board.getSnakeEndFrom(player.position);
+                
+                player.position = board.getLadderEndFrom(player.position);
+                
 
                 return true;
             }
@@ -62,8 +56,23 @@ var app = app || {};
             ladders: [],
             addLadder: function(start, end){
                 self.ladders.push({start: start,end: end});
+            },
+            getSnakeEndFrom: function(position){
+                return getSpecialPositionFrom(position, self.snakes);
+            },
+            getLadderEndFrom: function(position){
+                return getSpecialPositionFrom(position, self.ladders);
             }
         };
+        function getSpecialPositionFrom(position, collection){
+            var result = position;
+            collection.forEach(function(special){
+                if (special.start === position){
+                    position = special.end;
+                }
+            });
+            return position;
+        }
 
         return self;
     }
