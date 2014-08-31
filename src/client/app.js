@@ -5,8 +5,9 @@ var app = app || {};
 (function(){
     "use strict";
 
-    function init() {
+    function init(board) {
         var self = {
+            board: board,
             evaluate: function(player){
                 if (player.cantStart){
                     if (player.nextMove !== app.START_MOVE){
@@ -15,9 +16,14 @@ var app = app || {};
                     player.cantStart = false;
                     return true;
                 }
-
-
                 player.position += player.nextMove;
+
+                board.ladders.forEach(function(ladder){
+                    if (ladder.start === player.position){
+                        player.position = ladder.end;
+                    }
+                });
+
                 return true;
             }
         };
