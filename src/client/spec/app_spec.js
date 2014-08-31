@@ -111,6 +111,14 @@
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(5);
             });
+            it("finish the game if a player reachs the last field", function(){
+                player.cantStart = false;
+                player.position = 95;
+                player.nextMove = 5;
+                expect(game.evaluate(player)).toBe(true);
+                expect(game.winner).toBe(player);
+                expect(game.finished).toBe(true);
+            });
         });
     });
 
