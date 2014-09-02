@@ -3,6 +3,8 @@
 (function(){
     "use strict";
     
+    var _DEBUG = false;
+
     describe("Snake and ladders", function (){
         describe("Player", function(){
             var player;
@@ -188,7 +190,7 @@
             it("resolves a 1 player game", function(done){
                 gameSetup();
                 while (game.hasNotFinished()){
-                    console.log("player position: " + player.position);
+                    log("player position: " + player.position);
                     player.move();
                     game.evaluate(player);
                 }
@@ -199,18 +201,18 @@
                 gameSetup();
                 var player2 = app.Player(0);
                 while (game.hasNotFinished()){
-                    console.log("player position: " + player.position);
+                    log("player position: " + player.position);
                     player.move();
                     game.evaluate(player);
-                    console.log("player2 position: " + player2.position);
+                    log("player2 position: " + player2.position);
                     player2.move();
                     game.evaluate(player2);
                 }
                 if (game.winner === player){
-                    console.log("player1 wins");
+                    log("player1 wins");
                 }
                 if (game.winner === player2){
-                    console.log("player2 wins");
+                    log("player2 wins");
                 }
                 expect(game.finished).toBe(true);
                 done();
@@ -231,5 +233,8 @@
             }
         });
     });
+    function log(value){
+        if (_DEBUG) console.log(value)
+    }
 
 })();
