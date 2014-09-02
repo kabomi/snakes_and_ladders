@@ -26,16 +26,30 @@
                 player.moveBackward(6);
                 expect(player.position).toBe(0);
             });
-            it("moves an amount between 1 and 6", function(){
-                var i, error = false;
-                for (i = 0; i < 1000; i++){
+            it("moves an amount between 1 and 6", function(done){
+                var i, error = false, possibleValues = [];
+                var minValue = 1, maxValue = 6;
+                function notTestedAll(values){
+                    var i;
+                    for (i=minValue; i <= maxValue;i++){
+                        if (values[i] !== i) return true;
+                    }
+                    return false;
+                }
+                while (notTestedAll(possibleValues)){
                     player.move();
                     if (player.nextMove > 6 ||
-                        player.nextMove < 0){
+                        player.nextMove < 0 ||
+                        player.nextMove === undefined){
                         error = true;
+                        break;
+                    }else{
+                        possibleValues[player.nextMove] = player.nextMove;
                     }
                 }
+    
                 expect(error).toBeFalsy();
+                done();
             });
         });
         describe("Board", function(){
