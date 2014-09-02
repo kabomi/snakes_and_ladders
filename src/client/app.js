@@ -26,11 +26,16 @@ var app = app || {};
 
                 movePlayer(player);
 
-                if (self.hasNotFinished() &&
-                    player.nextMove === app.PLAYER_MOVE_MAX){
-
+                var countMaxMoves = 1;
+                while(rollProducesValidAmountOfMaxMoves(player, countMaxMoves)){
+                    countMaxMoves = countMaxMoves + 1;
                     player.roll();
                     movePlayer(player);
+                }
+
+                if (countMaxMoves === app.MAX_MOVE_MAX){
+                    player.position = 1;
+                    player.tooManyMaxMoves = true;
                 }
                 
                 return true;
@@ -55,6 +60,11 @@ var app = app || {};
             player.position = board.getSnakeEndFrom(player.position);
             
             player.position = board.getLadderEndFrom(player.position);
+        }
+        function rollProducesValidAmountOfMaxMoves(player, countMaxMoves){
+            return (self.hasNotFinished() &&
+                player.nextMove === app.PLAYER_MOVE_MAX &&
+                countMaxMoves < app.MAX_MOVE_MAX);
         }
         
         return self;
@@ -144,6 +154,7 @@ var app = app || {};
     app.init = init;
 
     app.START_MOVE = 3;
+    app.MAX_MOVE_MAX = 3;
     app.PLAYER_MOVE_MIN = 1;
     app.PLAYER_MOVE_MAX = 6;
 })();
