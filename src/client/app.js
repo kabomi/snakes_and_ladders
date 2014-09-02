@@ -14,7 +14,7 @@ var app = app || {};
                     return false;
                 }
 
-                player.move();
+                player.roll();
 
                 if (player.cantStart){
                     if (player.nextMove !== app.START_MOVE){
@@ -29,7 +29,7 @@ var app = app || {};
                 if (self.hasNotFinished() &&
                     player.nextMove === app.PLAYER_MOVE_MAX){
 
-                    player.move();
+                    player.roll();
                     movePlayer(player);
                 }
                 
@@ -70,7 +70,7 @@ var app = app || {};
                 self.position = self.position - numPositions;
                 if (self.position < 0) self.position = 0;
             },
-            move: function(){
+            roll: function(){
                 var amount = Math.floor((Math.random() * app.PLAYER_MOVE_MAX) + app.PLAYER_MOVE_MIN);
                 self.nextMove = amount;
             }

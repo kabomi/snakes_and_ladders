@@ -33,7 +33,7 @@
                 var minValue = app.PLAYER_MOVE_MIN, maxValue = app.PLAYER_MOVE_MAX;
             
                 while (notTestedAll(possibleValues)){
-                    player.move();
+                    player.roll();
                     if (player.nextMove > maxValue ||
                         player.nextMove < minValue ||
                         player.nextMove === undefined){
@@ -114,37 +114,37 @@
                 player.nextMove = 5;
             });
             it("moves the player during evaluation only if the player can start", function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 game.evaluate(player);
-                expect(player.move).toHaveBeenCalled();
+                expect(player.roll).toHaveBeenCalled();
             });
             it("evaluates next player position only if the player can start", function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 expect(game.evaluate(player)).toBe(false);
             });
             it("evaluates next player position", function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 player.cantStart = false;
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(5);
             });
             it("moves the player two times if player can start and its nextMove is " + app.PLAYER_MOVE_MAX, function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 player.cantStart = false;
                 player.nextMove = 6;
                 expect(game.evaluate(player)).toBe(true);
-                expect(player.move).toHaveBeenCalled();
-                expect(player.move.calls.count()).toBe(2);
+                expect(player.roll).toHaveBeenCalled();
+                expect(player.roll.calls.count()).toBe(2);
             });
             it("lets a player start after its next move is " + app.START_MOVE, function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 expect(game.evaluate(player)).toBe(false);
                 player.nextMove = app.START_MOVE;
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(0);
             });
             it("moves a player to the end of a ladder when its next move goes into ladder start", function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 board.addLadder(5, 15);
                 player.cantStart = false;
                 player.nextMove = 5;
@@ -152,7 +152,7 @@
                 expect(player.position).toBe(15);
             });
             it("moves a player to the end of a snake when its next move goes into snake start", function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 board.addSnake(15, 5);
                 player.cantStart = false;
                 player.nextMove = 15;
@@ -160,7 +160,7 @@
                 expect(player.position).toBe(5);
             });
             it("finish if a player reachs the last field", function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 player.cantStart = false;
                 player.position = 95;
                 player.nextMove = 5;
@@ -169,7 +169,7 @@
                 expect(game.finished).toBe(true);
             });
             it("finish if a player reachs the last field and there is a snake start", function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 board.addSnake(100, 50);
                 player.cantStart = false;
                 player.position = 95;
@@ -179,7 +179,7 @@
                 expect(game.finished).toBe(true);
             });
             it("doesnt finish if a player move beyond the last field", function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 board.addSnake(100, 50);
                 player.cantStart = false;
                 player.position = 95;
@@ -190,7 +190,7 @@
                 expect(player.position).toBe(95);
             });
             it("doesnt evaluate if there is a winner", function(){
-                spyOn(player, 'move');
+                spyOn(player, 'roll');
                 player.cantStart = false;
                 player.position = 95;
                 player.nextMove = 5;
@@ -208,7 +208,7 @@
                 gameSetup();
                 while (game.hasNotFinished()){
                     log("player position: " + player.position);
-                    //player.move();
+                    //player.roll();
                     game.evaluate(player);
                 }
                 expect(game.winner).toBe(player);
@@ -219,10 +219,10 @@
                 var player2 = app.Player(0);
                 while (game.hasNotFinished()){
                     log("player position: " + player.position);
-                    //player.move();
+                    //player.roll();
                     game.evaluate(player);
                     log("player2 position: " + player2.position);
-                    //player2.move();
+                    //player2.roll();
                     game.evaluate(player2);
                 }
                 if (game.winner === player){
