@@ -111,6 +111,11 @@
                 player = app.Player(0);
                 player.nextMove = 5;
             });
+            it("moves the player during evaluation only if the player can start", function(){
+                spyOn(player, 'move');
+                game.evaluate(player);
+                expect(player.move).toHaveBeenCalled();
+            });
             it("evaluates next player position only if the player can start", function(){
                 expect(game.evaluate(player)).toBe(false);
             });
