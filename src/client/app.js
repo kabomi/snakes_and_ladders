@@ -23,18 +23,15 @@ var app = app || {};
                     player.cantStart = false;
                     return true;
                 }
-                if ((player.position + player.nextMove) <= board.lastField){
-                    player.position += player.nextMove;
-                }
 
-                if (player.position === board.lastField){
-                    self.winner = player;
-                    self.finished = true;
-                }
+                movePlayer(player);
 
-                player.position = board.getSnakeEndFrom(player.position);
-                
-                player.position = board.getLadderEndFrom(player.position);
+                if (self.hasNotFinished() &&
+                    player.nextMove === app.PLAYER_MOVE_MAX){
+
+                    player.move();
+                    movePlayer(player);
+                }
                 
                 return true;
             },
@@ -45,6 +42,20 @@ var app = app || {};
                 return notFinished;
             }
         };
+        function movePlayer(player){
+            if ((player.position + player.nextMove) <= board.lastField){
+                player.position += player.nextMove;
+            }
+
+            if (player.position === board.lastField){
+                self.winner = player;
+                self.finished = true;
+            }
+
+            player.position = board.getSnakeEndFrom(player.position);
+            
+            player.position = board.getLadderEndFrom(player.position);
+        }
         
         return self;
     }

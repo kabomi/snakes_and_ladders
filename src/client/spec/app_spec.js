@@ -208,7 +208,7 @@
                 gameSetup();
                 while (game.hasNotFinished()){
                     log("player position: " + player.position);
-                    player.move();
+                    //player.move();
                     game.evaluate(player);
                 }
                 expect(game.winner).toBe(player);
@@ -219,10 +219,10 @@
                 var player2 = app.Player(0);
                 while (game.hasNotFinished()){
                     log("player position: " + player.position);
-                    player.move();
+                    //player.move();
                     game.evaluate(player);
                     log("player2 position: " + player2.position);
-                    player2.move();
+                    //player2.move();
                     game.evaluate(player2);
                 }
                 if (game.winner === player){
