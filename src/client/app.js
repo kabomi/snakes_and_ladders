@@ -24,6 +24,14 @@ var app = app || {};
                     return true;
                 }
 
+                if (player.tooManyMaxMoves){
+                    player.position = 1;
+                    if (player.nextMove === app.PLAYER_MOVE_MAX){
+                        player.tooManyMaxMoves = false;
+                    }
+                    return true;
+                }
+
                 movePlayer(player);
 
                 var countMaxMoves = 1;

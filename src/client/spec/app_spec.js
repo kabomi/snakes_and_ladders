@@ -159,18 +159,18 @@
                 spyOn(player, 'roll').and.callFake(function(){
                     if (firstTime){ 
                         firstTime = false;
-                        expect(player.position).toBe(1);
                     }else{
                         player.nextMove = app.PLAYER_MOVE_MAX;
-                        expect(player.position).toBe(1);
-                        expect(player.tooManyMaxMoves).toBeFalsy();
                     }
                 });
                 player.cantStart = false;
                 player.tooManyMaxMoves = true;
                 player.nextMove = 5;
                 expect(game.evaluate(player)).toBe(true);
+                expect(player.position).toBe(1);
                 expect(game.evaluate(player)).toBe(true);
+                expect(player.position).toBe(1);
+                expect(player.tooManyMaxMoves).toBe(false);
             });
             it("lets a player start after its next move is " + app.START_MOVE, function(){
                 spyOn(player, 'roll');
