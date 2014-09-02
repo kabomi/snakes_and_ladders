@@ -181,6 +181,36 @@
                 expect(game.finished).toBe(true);
             });
             it("resolves a 1 player game", function(done){
+                gameSetup();
+                while (game.hasNotFinished()){
+                    console.log("player position: " + player.position);
+                    player.move();
+                    game.evaluate(player);
+                }
+                expect(game.winner).toBe(player);
+                done();
+            });
+            it("resolves a 2 player game", function(done){
+                gameSetup();
+                var player2 = app.Player(0);
+                while (game.hasNotFinished()){
+                    console.log("player position: " + player.position);
+                    player.move();
+                    game.evaluate(player);
+                    console.log("player2 position: " + player2.position);
+                    player2.move();
+                    game.evaluate(player2);
+                }
+                if (game.winner === player){
+                    console.log("player1 wins");
+                }
+                if (game.winner === player2){
+                    console.log("player2 wins");
+                }
+                expect(game.finished).toBe(true);
+                done();
+            });
+            function gameSetup(){
                 board.addLadder(3, 10);
                 board.addLadder(13, 25);
                 board.addLadder(30, 70);
@@ -193,14 +223,7 @@
                 board.addSnake(50, 33);
                 board.addSnake(80, 72);
                 board.addSnake(98, 61);
-                while (game.hasNotFinished()){
-                    console.log("player position: " + player.position);
-                    player.move();
-                    game.evaluate(player);
-                }
-                expect(game.winner).toBe(player);
-                done();
-            });
+            }
         });
     });
 
