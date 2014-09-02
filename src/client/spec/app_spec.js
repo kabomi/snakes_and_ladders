@@ -26,6 +26,17 @@
                 player.moveBackward(6);
                 expect(player.position).toBe(0);
             });
+            it("moves an amount between 1 and 6", function(){
+                var i, error = false;
+                for (i = 0; i < 1000; i++){
+                    player.move();
+                    if (player.nextMove > 6 ||
+                        player.nextMove < 0){
+                        error = true;
+                    }
+                }
+                expect(error).toBeFalsy();
+            });
         });
         describe("Board", function(){
             var board;
