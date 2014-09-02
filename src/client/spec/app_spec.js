@@ -145,7 +145,7 @@
             });
             it("moves the player to the start position if player rolls three consecutive " + app.PLAYER_MOVE_MAX, function(){
                 spyOn(player, 'roll').and.callFake(function(){
-                    player.nextMove = 6;
+                    player.nextMove = app.PLAYER_MOVE_MAX;
                 });
                 player.cantStart = false;
                 expect(game.evaluate(player)).toBe(true);
@@ -153,6 +153,24 @@
                 expect(player.roll.calls.count()).toBe(3);
                 expect(player.position).toBe(1);
                 expect(player.tooManyMaxMoves).toBe(true);
+            });
+            it("doesnt move a player who has tooManyMaxMoves until player rolls a " + app.PLAYER_MOVE_MAX, function(){
+                var firstTime = true;
+                spyOn(player, 'roll').and.callFake(function(){
+                    if (firstTime){ 
+                        firstTime = false;
+                        expect(player.position).toBe(1);
+                    }else{
+                        player.nextMove = app.PLAYER_MOVE_MAX;
+                        expect(player.position).toBe(1);
+                        expect(player.tooManyMaxMoves).toBeFalsy();
+                    }
+                });
+                player.cantStart = false;
+                player.tooManyMaxMoves = true;
+                player.nextMove = 5;
+                expect(game.evaluate(player)).toBe(true);
+                expect(game.evaluate(player)).toBe(true);
             });
             it("lets a player start after its next move is " + app.START_MOVE, function(){
                 spyOn(player, 'roll');
