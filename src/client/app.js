@@ -61,14 +61,14 @@ var app = app || {};
                 player.position += player.nextMove;
             }
 
+            player.position = board.getLadderEndFrom(player.position);
+
             if (player.position === board.lastField){
                 self.winner = player;
                 self.finished = true;
             }
 
             player.position = board.getSnakeEndFrom(player.position);
-            
-            player.position = board.getLadderEndFrom(player.position);
         }
         function rollProducesValidAmountOfMaxMoves(player, countMaxMoves){
             return (self.hasNotFinished() &&
