@@ -57,7 +57,7 @@ var app = app || {};
                 if (self.position < 0) self.position = 0;
             },
             move: function(){
-                var amount = Math.floor((Math.random() * 6) + 1);
+                var amount = Math.floor((Math.random() * app.PLAYER_MOVE_MAX) + app.PLAYER_MOVE_MIN);
                 self.nextMove = amount;
             }
         };
@@ -88,25 +88,28 @@ var app = app || {};
         function addSpecial(start, end, type){
             var validPositions = true;
                 self.snakes.forEach(function(snake){
-                    if ((snake.start === start) ||
-                        (snake.start === end) ||
-                        (snake.end === start) ||
-                        (snake.end === end)){
-
+                    if (hasNotValidPositions(snake)){
                         validPositions = false;
-                    }
+                    };
                 });
                 self.ladders.forEach(function(ladder){
-                    if ((ladder.start === start) ||
-                        (ladder.start === end) ||
-                        (ladder.end === start) ||
-                        (ladder.end === end)){
-
+                    if (hasNotValidPositions(ladder)){
                         validPositions = false;
-                    }
+                    };
                 });
                 if (validPositions){
                     self[type].push({start: start,end: end});
+                }
+                function hasNotValidPositions(special){
+                    if ((special.start === start) ||
+                        (special.start === end) ||
+                        (special.end === start) ||
+                        (special.end === end)){
+
+                        return true;
+                    }
+
+                    return false;
                 }
         }
         function getSpecialPositionFrom(position, collection){
