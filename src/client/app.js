@@ -106,10 +106,18 @@ var app = app || {};
             startField: 1,
             snakes: [],
             addSnake: function(start, end){
+                if ((end < self.startField) ||
+                    (start > self.lastField)){
+                    return;
+                }
                 addSpecial(start, end, 'snakes');
             },
             ladders: [],
             addLadder: function(start, end){
+                if ((start < self.startField) ||
+                    (end > self.lastField)){
+                    return;
+                }
                 addSpecial(start, end, 'ladders');
             },
             getSnakeEndFrom: function(position){
@@ -124,12 +132,13 @@ var app = app || {};
                 self.snakes.forEach(function(snake){
                     if (hasNotValidPositions(snake)){
                         validPositions = false;
-                    };
+                    }
+                    
                 });
                 self.ladders.forEach(function(ladder){
                     if (hasNotValidPositions(ladder)){
                         validPositions = false;
-                    };
+                    }
                 });
                 if (validPositions){
                     self[type].push({start: start,end: end});
