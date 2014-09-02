@@ -26,21 +26,16 @@
                 player.moveBackward(6);
                 expect(player.position).toBe(0);
             });
-            it("moves an amount between 1 and 6", function(done){
+            it("moves an amount between " + app.PLAYER_MOVE_MIN + " and " + app.PLAYER_MOVE_MAX, function(done){
                 var i, error = false, possibleValues = [];
-                var minValue = 1, maxValue = 6;
-                function notTestedAll(values){
-                    var i;
-                    for (i=minValue; i <= maxValue;i++){
-                        if (values[i] !== i) return true;
-                    }
-                    return false;
-                }
+                var minValue = app.PLAYER_MOVE_MIN, maxValue = app.PLAYER_MOVE_MAX;
+            
                 while (notTestedAll(possibleValues)){
                     player.move();
-                    if (player.nextMove > 6 ||
-                        player.nextMove < 0 ||
+                    if (player.nextMove > maxValue ||
+                        player.nextMove < minValue ||
                         player.nextMove === undefined){
+
                         error = true;
                         break;
                     }else{
@@ -50,6 +45,14 @@
     
                 expect(error).toBeFalsy();
                 done();
+
+                function notTestedAll(values){
+                    var i;
+                    for (i=minValue; i <= maxValue;i++){
+                        if (values[i] !== i) return true;
+                    }
+                    return false;
+                }
             });
         });
         describe("Board", function(){

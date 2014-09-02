@@ -121,4 +121,6 @@ var app = app || {};
     app.init = init;
 
     app.START_MOVE = 3;
+    app.PLAYER_MOVE_MIN = 1;
+    app.PLAYER_MOVE_MAX = 6;
 })();
