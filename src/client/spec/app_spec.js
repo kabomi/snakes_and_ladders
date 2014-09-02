@@ -113,6 +113,12 @@
                 player = app.Player(0);
                 player.nextMove = 5;
             });
+            it("moves the player to the start field if the player can not start", function(){
+                spyOn(player, 'roll');
+                game.evaluate(player);
+                expect(player.position).toBe(1);
+                expect(player.cantStart).toBe(true);
+            });
             it("moves the player during evaluation only if the player can start", function(){
                 spyOn(player, 'roll');
                 game.evaluate(player);
