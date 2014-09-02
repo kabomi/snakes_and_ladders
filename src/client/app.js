@@ -13,6 +13,9 @@ var app = app || {};
                     self.winner){
                     return false;
                 }
+
+                player.move();
+
                 if (player.cantStart){
                     if (player.nextMove !== app.START_MOVE){
                         return false;  
