@@ -241,6 +241,17 @@
                 expect(game.finished).toBeFalsy();
                 expect(player.position).toBe(98);
             });
+            it("finish if a player uses a ladder which end is the las field", function(){
+                spyOn(player, 'roll');
+                board.addLadder(50, 100);
+                player.cantStart = false;
+                player.position = 45;
+                player.nextMove = 5;
+                expect(game.evaluate(player)).toBe(true);
+                expect(game.winner).toBe(player);
+                expect(game.finished).toBeTruthy();
+                expect(player.position).toBe(100);
+            });
             it("doesnt evaluate if there is a winner", function(){
                 spyOn(player, 'roll');
                 player.cantStart = false;
