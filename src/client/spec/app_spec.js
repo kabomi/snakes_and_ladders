@@ -80,6 +80,16 @@
                 expect(ladder.start).toBe(5);
                 expect(ladder.end).toBe(15);
             });
+            it("can't add a snake or ladder that's outer board", function(){
+                //board.addLadder(0, 30);
+                //board.addLadder(1, 101);
+                //board.addLadder(0, 101);
+                //board.addSnake(30, 0);
+                //board.addSnake(101, 1);
+                board.addSnake(101, 0);
+                expect(board.ladders.length).toBe(0);
+                expect(board.snakes.length).toBe(0);
+            });
             it("can't add a snake or ladder if its start/end coincides with start/end of others", function(){
                 board.addSnake(15, 5);
                 expect(board.snakes.length).toBe(1);
