@@ -34,6 +34,12 @@ var app = app || {};
                 player.position = board.getLadderEndFrom(player.position);
                 
                 return true;
+            },
+            hasNotFinished: function(){
+                var notFinished = true;
+                if (self.finished) return false;
+
+                return notFinished;
             }
         };
         
