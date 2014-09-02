@@ -129,12 +129,30 @@
                 expect(player.position).toBe(5);
             });
             it("moves the player two times if player can start and its nextMove is " + app.PLAYER_MOVE_MAX, function(){
-                spyOn(player, 'roll');
+                var firstTime = true;
+                spyOn(player, 'roll').and.callFake(function(){
+                    if (firstTime){ 
+                        firstTime = false;
+                    }else{
+                        player.nextMove = 1;
+                    }
+                });
                 player.cantStart = false;
                 player.nextMove = 6;
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.roll).toHaveBeenCalled();
                 expect(player.roll.calls.count()).toBe(2);
+            });
+            it("moves the player to the start position if player rolls three consecutive " + app.PLAYER_MOVE_MAX, function(){
+                spyOn(player, 'roll').and.callFake(function(){
+                    player.nextMove = 6;
+                });
+                player.cantStart = false;
+                expect(game.evaluate(player)).toBe(true);
+                expect(player.roll).toHaveBeenCalled();
+                expect(player.roll.calls.count()).toBe(3);
+                expect(player.position).toBe(1);
+                expect(player.tooManyMaxMoves).toBe(true);
             });
             it("lets a player start after its next move is " + app.START_MOVE, function(){
                 spyOn(player, 'roll');
@@ -182,12 +200,12 @@
                 spyOn(player, 'roll');
                 board.addSnake(100, 50);
                 player.cantStart = false;
-                player.position = 95;
-                player.nextMove = 6;
+                player.position = 98;
+                player.nextMove = 5;
                 expect(game.evaluate(player)).toBe(true);
                 expect(game.winner).toBeUndefined();
                 expect(game.finished).toBeFalsy();
-                expect(player.position).toBe(95);
+                expect(player.position).toBe(98);
             });
             it("doesnt evaluate if there is a winner", function(){
                 spyOn(player, 'roll');
