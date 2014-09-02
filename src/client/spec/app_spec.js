@@ -183,7 +183,7 @@
                 expect(game.evaluate(player)).toBe(false);
                 player.nextMove = app.START_MOVE;
                 expect(game.evaluate(player)).toBe(true);
-                expect(player.position).toBe(0);
+                expect(player.position).toBe(1);
             });
             it("moves a player to the end of a ladder when its next move goes into ladder start", function(){
                 spyOn(player, 'roll');

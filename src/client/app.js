@@ -17,6 +17,7 @@ var app = app || {};
                 player.roll();
 
                 if (player.cantStart){
+                    player.position = 1;
                     if (player.nextMove !== app.START_MOVE){
                         return false;  
                     }
