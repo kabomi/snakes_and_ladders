@@ -128,6 +128,14 @@
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.position).toBe(5);
             });
+            it("moves the player two times if player can start and its nextMove is " + app.PLAYER_MOVE_MAX, function(){
+                spyOn(player, 'move');
+                player.cantStart = false;
+                player.nextMove = 6;
+                expect(game.evaluate(player)).toBe(true);
+                expect(player.move).toHaveBeenCalled();
+                expect(player.move.calls.count()).toBe(2);
+            });
             it("lets a player start after its next move is " + app.START_MOVE, function(){
                 spyOn(player, 'move');
                 expect(game.evaluate(player)).toBe(false);
