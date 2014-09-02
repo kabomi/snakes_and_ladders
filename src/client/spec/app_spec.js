@@ -81,11 +81,11 @@
                 expect(ladder.end).toBe(15);
             });
             it("can't add a snake or ladder that's outer board", function(){
-                //board.addLadder(0, 30);
-                //board.addLadder(1, 101);
-                //board.addLadder(0, 101);
-                //board.addSnake(30, 0);
-                //board.addSnake(101, 1);
+                board.addLadder(0, 30);
+                board.addLadder(1, 101);
+                board.addLadder(0, 101);
+                board.addSnake(30, 0);
+                board.addSnake(101, 1);
                 board.addSnake(101, 0);
                 expect(board.ladders.length).toBe(0);
                 expect(board.snakes.length).toBe(0);
@@ -126,7 +126,7 @@
             it("moves the player to the start field if the player can not start", function(){
                 spyOn(player, 'roll');
                 game.evaluate(player);
-                expect(player.position).toBe(board.startField);
+                expect(player.position).toBe(app.START_POSITION);
                 expect(player.cantStart).toBe(true);
             });
             it("moves the player during evaluation only if the player can start", function(){
@@ -167,7 +167,7 @@
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.roll).toHaveBeenCalled();
                 expect(player.roll.calls.count()).toBe(3);
-                expect(player.position).toBe(board.startField);
+                expect(player.position).toBe(app.START_POSITION);
                 expect(player.tooManyMaxMoves).toBe(true);
             });
             it("doesnt move a player who has tooManyMaxMoves until player rolls a " + app.PLAYER_MOVE_MAX, function(){
@@ -183,9 +183,9 @@
                 player.tooManyMaxMoves = true;
                 player.nextMove = 5;
                 expect(game.evaluate(player)).toBe(true);
-                expect(player.position).toBe(board.startField);
+                expect(player.position).toBe(app.START_POSITION);
                 expect(game.evaluate(player)).toBe(true);
-                expect(player.position).toBe(board.startField);
+                expect(player.position).toBe(app.START_POSITION);
                 expect(player.tooManyMaxMoves).toBe(false);
             });
             it("lets a player start after its next move is " + app.START_MOVE, function(){
@@ -193,7 +193,7 @@
                 expect(game.evaluate(player)).toBe(false);
                 player.nextMove = app.START_MOVE;
                 expect(game.evaluate(player)).toBe(true);
-                expect(player.position).toBe(board.startField);
+                expect(player.position).toBe(app.START_POSITION);
             });
             it("moves a player to the end of a ladder when its next move goes into ladder start", function(){
                 spyOn(player, 'roll');

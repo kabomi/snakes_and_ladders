@@ -17,7 +17,7 @@ var app = app || {};
                 player.roll();
 
                 if (player.cantStart){
-                    player.position = board.startField;
+                    player.position = app.START_POSITION;
                     if (player.nextMove !== app.START_MOVE){
                         return false;  
                     }
@@ -26,7 +26,7 @@ var app = app || {};
                 }
 
                 if (player.tooManyMaxMoves){
-                    player.position = board.startField;
+                    player.position = app.START_POSITION;
                     if (player.nextMove === app.PLAYER_MOVE_MAX){
                         player.tooManyMaxMoves = false;
                     }
@@ -43,7 +43,7 @@ var app = app || {};
                 }
 
                 if (countMaxMoves === app.MAX_MOVE_MAX){
-                    player.position = board.startField;
+                    player.position = app.START_POSITION;
                     player.tooManyMaxMoves = true;
                 }
                 
@@ -87,7 +87,7 @@ var app = app || {};
             },
             moveBackward: function(numPositions){
                 self.position = self.position - numPositions;
-                if (self.position < 0) self.position = 0;
+                if (self.position < app.START_POSITION) self.position = app.START_POSITION;
             },
             roll: function(){
                 var amount = Math.floor((Math.random() * app.PLAYER_MOVE_MAX) + app.PLAYER_MOVE_MIN);
@@ -172,6 +172,7 @@ var app = app || {};
     app.Board = Board;
     app.init = init;
 
+    app.START_POSITION = 0;
     app.START_MOVE = 3;
     app.MAX_MOVE_MAX = 3;
     app.PLAYER_MOVE_MIN = 1;
