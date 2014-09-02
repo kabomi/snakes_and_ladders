@@ -116,7 +116,7 @@
             it("moves the player to the start field if the player can not start", function(){
                 spyOn(player, 'roll');
                 game.evaluate(player);
-                expect(player.position).toBe(1);
+                expect(player.position).toBe(board.startField);
                 expect(player.cantStart).toBe(true);
             });
             it("moves the player during evaluation only if the player can start", function(){
@@ -157,7 +157,7 @@
                 expect(game.evaluate(player)).toBe(true);
                 expect(player.roll).toHaveBeenCalled();
                 expect(player.roll.calls.count()).toBe(3);
-                expect(player.position).toBe(1);
+                expect(player.position).toBe(board.startField);
                 expect(player.tooManyMaxMoves).toBe(true);
             });
             it("doesnt move a player who has tooManyMaxMoves until player rolls a " + app.PLAYER_MOVE_MAX, function(){
@@ -173,9 +173,9 @@
                 player.tooManyMaxMoves = true;
                 player.nextMove = 5;
                 expect(game.evaluate(player)).toBe(true);
-                expect(player.position).toBe(1);
+                expect(player.position).toBe(board.startField);
                 expect(game.evaluate(player)).toBe(true);
-                expect(player.position).toBe(1);
+                expect(player.position).toBe(board.startField);
                 expect(player.tooManyMaxMoves).toBe(false);
             });
             it("lets a player start after its next move is " + app.START_MOVE, function(){
@@ -183,7 +183,7 @@
                 expect(game.evaluate(player)).toBe(false);
                 player.nextMove = app.START_MOVE;
                 expect(game.evaluate(player)).toBe(true);
-                expect(player.position).toBe(1);
+                expect(player.position).toBe(board.startField);
             });
             it("moves a player to the end of a ladder when its next move goes into ladder start", function(){
                 spyOn(player, 'roll');
@@ -250,7 +250,6 @@
                 gameSetup();
                 while (game.hasNotFinished()){
                     log("player position: " + player.position);
-                    //player.roll();
                     game.evaluate(player);
                 }
                 expect(game.winner).toBe(player);
@@ -261,10 +260,8 @@
                 var player2 = app.Player(0);
                 while (game.hasNotFinished()){
                     log("player position: " + player.position);
-                    //player.roll();
                     game.evaluate(player);
                     log("player2 position: " + player2.position);
-                    //player2.roll();
                     game.evaluate(player2);
                 }
                 if (game.winner === player){

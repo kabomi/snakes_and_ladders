@@ -17,7 +17,7 @@ var app = app || {};
                 player.roll();
 
                 if (player.cantStart){
-                    player.position = 1;
+                    player.position = board.startField;
                     if (player.nextMove !== app.START_MOVE){
                         return false;  
                     }
@@ -26,7 +26,7 @@ var app = app || {};
                 }
 
                 if (player.tooManyMaxMoves){
-                    player.position = 1;
+                    player.position = board.startField;
                     if (player.nextMove === app.PLAYER_MOVE_MAX){
                         player.tooManyMaxMoves = false;
                     }
@@ -43,7 +43,7 @@ var app = app || {};
                 }
 
                 if (countMaxMoves === app.MAX_MOVE_MAX){
-                    player.position = 1;
+                    player.position = board.startField;
                     player.tooManyMaxMoves = true;
                 }
                 
@@ -103,6 +103,7 @@ var app = app || {};
             width: width,
             height: height,
             lastField: width*height,
+            startField: 1,
             snakes: [],
             addSnake: function(start, end){
                 addSpecial(start, end, 'snakes');
