@@ -180,6 +180,27 @@
                 expect(game.winner).toBe(player);
                 expect(game.finished).toBe(true);
             });
+            it("resolves a 1 player game", function(done){
+                board.addLadder(3, 10);
+                board.addLadder(13, 25);
+                board.addLadder(30, 70);
+                board.addLadder(40, 55);
+                board.addLadder(74, 95);
+
+                board.addSnake(12, 2);
+                board.addSnake(23, 9);
+                board.addSnake(60, 42);
+                board.addSnake(50, 33);
+                board.addSnake(80, 72);
+                board.addSnake(98, 61);
+                while (game.hasNotFinished()){
+                    console.log("player position: " + player.position);
+                    player.move();
+                    game.evaluate(player);
+                }
+                expect(game.winner).toBe(player);
+                done();
+            });
         });
     });
 
